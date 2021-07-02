@@ -63,7 +63,7 @@ public class ApiService {
         log.info("Servicio De enviar emails iniciado...");
         try {
             Map<String, Object> map = new HashMap<>();
-            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarComprasProgramadasQuartz", map, void.class);
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarEmailComprobantesQuartz", map, void.class);
             log.info("El envío de emails de comprobantes culminó exitosamente...");
         } catch (RestClientException e) {
             log.error("Error enviamos emails de comprobantes", e.getMessage());
