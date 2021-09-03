@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.acosux</groupId>
-    <artifactId>QuartzMS</artifactId>
+    <artifactId>MSQuartz</artifactId>
     <version>0.0.1</version>
     <packaging>war</packaging>
-    <name>QuartzMS</name>
+    <name>MSQuartz</name>
     <description>Microservicio Quartz</description>
     <properties>
         <java.version>1.8</java.version>
