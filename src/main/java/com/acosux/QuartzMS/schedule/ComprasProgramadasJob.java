@@ -6,6 +6,7 @@
 package com.acosux.QuartzMS.schedule;
 
 import com.acosux.QuartzMS.service.ApiService;
+import java.util.logging.Level;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -30,7 +31,11 @@ public class ComprasProgramadasJob implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         log.info("COMPRAS PROGRAMADAS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
-        bs.enviarComprasProgramadasQuartz();
+        try {
+            bs.enviarComprasProgramadasQuartz();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(ComprasProgramadasJob.class.getName()).log(Level.SEVERE, null, ex);
+        }
         log.info("EL SIGUIENTE REGISTRO DE COMPRAS PROGRAMADAS se ejecutará @ {}", context.getNextFireTime());
     }
 

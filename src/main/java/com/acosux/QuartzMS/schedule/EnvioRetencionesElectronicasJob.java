@@ -6,6 +6,7 @@
 package com.acosux.QuartzMS.schedule;
 
 import com.acosux.QuartzMS.service.ApiService;
+import java.util.logging.Level;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -30,7 +31,11 @@ public class EnvioRetencionesElectronicasJob implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         log.info("ENVIO RETENCIONES ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
-        bs.enviarRetencionesElectronicasQuartz();
+        try {
+            bs.enviarRetencionesElectronicasQuartz();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(EnvioRetencionesElectronicasJob.class.getName()).log(Level.SEVERE, null, ex);
+        }
         log.info("EL SIGUIENTE ENVIO DE RETENCIONES se ejecutará @ {}", context.getNextFireTime());
     }
 

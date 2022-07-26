@@ -6,6 +6,7 @@
 package com.acosux.QuartzMS.schedule;
 
 import com.acosux.QuartzMS.service.ApiService;
+import java.util.logging.Level;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
@@ -30,7 +31,11 @@ public class EnvioFacturasElectronicasJob implements Job {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         log.info("FACTURAS ELECTRONICAS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
-        bs.enviarFacturasElectronicasQuartz();
+        try {
+            bs.enviarFacturasElectronicasQuartz();
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(EnvioFacturasElectronicasJob.class.getName()).log(Level.SEVERE, null, ex);
+        }
         log.info("EL SIGUIENTE ENVIO DE FACTURAS se ejecutará @ {}", context.getNextFireTime());
     }
 
