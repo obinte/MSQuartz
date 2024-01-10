@@ -30,6 +30,8 @@ public class QuartzSchedulerJobs {
     private String CRON_EMAILS;
     @Value("${quartz.croncompras}")
     private String CRON_COMPRAS;
+    @Value("${quartz.cronanularoc}")
+    private String CRON_ANULAR_OC;
     Logger log = LoggerFactory.getLogger(getClass());
 
     /**
@@ -86,6 +88,20 @@ public class QuartzSchedulerJobs {
     @Bean(name = "comprasProgramadasTrigger")
     public CronTriggerFactoryBean triggerComprasProgramadas(@Qualifier("comprasProgramadas") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_COMPRAS, "triggerComprasProgramadas");
+    }
+
+    /**
+     *
+     * @return a job of a specifics ANULAR ORDENES DE COMPRA
+     */
+    @Bean(name = "anularOrdenesDeCompra")
+    public JobDetailFactoryBean jobAnularOrdenesDeCompra() {
+        return QuartzConfig.createJobDetail(AnularOrdenesDeCompraJob.class, "jobAnularOrdenesDeCompra");
+    }
+
+    @Bean(name = "anularOrdenesDeCompraTrigger")
+    public CronTriggerFactoryBean triggerAnularOrdenesDeCompra(@Qualifier("anularOrdenesDeCompra") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_ANULAR_OC, "triggerAnularOrdenesDeCompra");
     }
 
 }

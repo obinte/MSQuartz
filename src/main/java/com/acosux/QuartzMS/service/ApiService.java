@@ -98,4 +98,16 @@ public class ApiService {
         }
     }
 
+    public void anularOrdenesDeCompraQuartz() throws Exception {
+        log.info("Servicio De anulación de órdenes de compra iniciado...");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/anularOrdenesCompraQuartz", createTokenForUser(map), void.class);
+            log.info("El proceso de anulacion de órdenes de compras culminó exitosamente...");
+        } catch (RestClientException e) {
+            log.error("Error anulacion de órdenes de compras", e.getMessage());
+        }
+    }
+
 }
+
