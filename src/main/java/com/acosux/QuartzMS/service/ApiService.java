@@ -109,5 +109,15 @@ public class ApiService {
         }
     }
 
-}
+    public void enviarNotificacionesEmpleadosQuartz() throws Exception {
+        log.info("Servicio De envío de notificaciones empleados iniciado...");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarNotificacionesEmpleadosQuartz", createTokenForUser(map), void.class);
+            log.info("El proceso de envío de notificaciones empleados culminó exitosamente...");
+        } catch (RestClientException e) {
+            log.error("Error envío de notificaciones empleados", e.getMessage());
+        }
+    }
 
+}
