@@ -30,13 +30,13 @@ public class ComprasProgramadasJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("COMPRAS PROGRAMADAS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - COMPRAS PROGRAMADAS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
         try {
             bs.enviarComprasProgramadasQuartz();
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(ComprasProgramadasJob.class.getName()).log(Level.SEVERE, null, ex);
         }
-        log.info("EL SIGUIENTE REGISTRO DE COMPRAS PROGRAMADAS se ejecutará @ {}", context.getNextFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - EL SIGUIENTE REGISTRO DE COMPRAS PROGRAMADAS se ejecutará @ {}", context.getNextFireTime());
     }
 
 }

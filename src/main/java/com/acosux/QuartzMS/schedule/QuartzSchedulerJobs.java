@@ -91,6 +91,20 @@ public class QuartzSchedulerJobs {
     public CronTriggerFactoryBean triggerComprasProgramadas(@Qualifier("comprasProgramadas") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_COMPRAS, "triggerComprasProgramadas");
     }
+    
+    /**
+     *
+     * @return a job of a specifics ENVIAR NOTIFICACIONES EMPLEADOS
+     */
+    @Bean(name = "enviarNotificacionesEmpleados")
+    public JobDetailFactoryBean jobEnviarNotificacionesEmpleados() {
+        return QuartzConfig.createJobDetail(EnviarNotificacionesEmpleadosJob.class, "jobAnularOrdenesDeCompra");
+    }
+
+    @Bean(name = "enviarNotificacionesEmpleadosTrigger")
+    public CronTriggerFactoryBean triggerEnviarNotificacionesEmpleados(@Qualifier("enviarNotificacionesEmpleados") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_ENVIAR_NOTIFICACIONES_EMPLEADOS, "triggerEnviarNotificacionesEmpleados");
+    }
 
     /**
      *
@@ -104,19 +118,6 @@ public class QuartzSchedulerJobs {
     @Bean(name = "anularOrdenesDeCompraTrigger")
     public CronTriggerFactoryBean triggerAnularOrdenesDeCompra(@Qualifier("anularOrdenesDeCompra") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_ANULAR_OC, "triggerAnularOrdenesDeCompra");
-    }
-    /**
-     *
-     * @return a job of a specifics ANULAR ORDENES DE COMPRA
-     */
-    @Bean(name = "enviarNotificacionesEmpleados")
-    public JobDetailFactoryBean jobEnviarNotificacionesEmpleados() {
-        return QuartzConfig.createJobDetail(EnviarNotificacionesEmpleadosJob.class, "jobAnularOrdenesDeCompra");
-    }
-
-    @Bean(name = "enviarNotificacionesEmpleadosTrigger")
-    public CronTriggerFactoryBean triggerEnviarNotificacionesEmpleados(@Qualifier("enviarNotificacionesEmpleados") JobDetail jobDetail) {
-        return QuartzConfig.createCronTrigger(jobDetail, CRON_ENVIAR_NOTIFICACIONES_EMPLEADOS, "triggerEnviarNotificacionesEmpleados");
     }
 
 }

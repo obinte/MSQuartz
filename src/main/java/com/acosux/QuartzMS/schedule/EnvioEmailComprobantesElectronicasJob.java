@@ -30,13 +30,13 @@ public class EnvioEmailComprobantesElectronicasJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("ENVIO EMAIL ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - ENVIO EMAIL ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
         try {
             bs.enviarEmailComprobantesQuartz();
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(EnvioEmailComprobantesElectronicasJob.class.getName()).log(Level.SEVERE, null, ex);
         }
-        log.info("EL SIGUIENTE ENVIO DE CORREOS se ejecutará @ {}", context.getNextFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - EL SIGUIENTE ENVIO DE CORREOS se ejecutará @ {}", context.getNextFireTime());
     }
 
 }

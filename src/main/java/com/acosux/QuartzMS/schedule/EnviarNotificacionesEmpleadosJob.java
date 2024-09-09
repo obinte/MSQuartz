@@ -27,13 +27,13 @@ public class EnviarNotificacionesEmpleadosJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("ENVIAR NOTIFICACIONES EMPLEADOS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - ENVIAR NOTIFICACIONES EMPLEADOS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
         try {
             bs.enviarNotificacionesEmpleadosQuartz();
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(ComprasProgramadasJob.class.getName()).log(Level.SEVERE, null, ex);
         }
-        log.info("EL ENVIO DE NOTIFICACIONES EMPLEADOS se ejecutará @ {}", context.getNextFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - EL PROXIMO ENVIO DE NOTIFICACIONES EMPLEADOS se ejecutará @ {}", context.getNextFireTime());
     }
 
 }

@@ -27,13 +27,13 @@ public class AnularOrdenesDeCompraJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("ANULAR ÓRDENES DE COMPRA ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - ANULAR ÓRDENES DE COMPRA ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
         try {
             bs.anularOrdenesDeCompraQuartz();
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(ComprasProgramadasJob.class.getName()).log(Level.SEVERE, null, ex);
         }
-        log.info("LA ANULACIÓN DE ÓRDENES DE COMPRA se ejecutará @ {}", context.getNextFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - LA PROXIMA ANULACIÓN DE ÓRDENES DE COMPRA se ejecutará @ {}", context.getNextFireTime());
     }
 
 }
