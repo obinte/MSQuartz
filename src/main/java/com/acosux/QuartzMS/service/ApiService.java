@@ -55,68 +55,68 @@ public class ApiService {
     }
 
     public void enviarFacturasElectronicasQuartz() throws Exception {
-        log.info("Servicio De envío de facturas iniciado...");
+        log.info("SERVICE MSQUARTZ - Envío de facturas iniciado.");
         try {
             Map<String, Object> map = new HashMap<>();
             restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarFacturasElectronicasQuartz", createTokenForUser(map), void.class);
-            log.info("El envío de facturas culminó exitosamente...");
+            log.info("SERVICE MSQUARTZ - Envío de facturas culminó exitosamente.");
         } catch (RestClientException e) {
-            log.error("Error mientras enviamos facturas electronicas", e.getMessage());
+            log.error("SERVICE MSQUARTZ - Error mientras enviamos facturas electronicas.", e.getMessage());
         }
     }
 
     public void enviarRetencionesElectronicasQuartz() throws Exception {
-        log.info("Servicio De envío de retenciones iniciado...");
+        log.info("SERVICE MSQUARTZ - Envío de retenciones iniciado.");
         try {
             Map<String, Object> map = new HashMap<>();
             restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarRetencionesElectronicasQuartz", createTokenForUser(map), void.class);
-            log.info("El envío de retenciones culminó exitosamente...");
+            log.info("SERVICE MSQUARTZ - Envío de retenciones culminó exitosamente.");
         } catch (RestClientException e) {
-            log.error("Error mientras enviamos retenciones electronicas", e.getMessage());
+            log.error("SERVICE MSQUARTZ - Error mientras enviamos retenciones electronicas.", e.getMessage());
         }
     }
 
     public void enviarComprasProgramadasQuartz() throws Exception {
-        log.info("Servicio De compras porgramadas iniciado...");
+        log.info("SERVICE MSQUARTZ - Registro De compras porgramadas iniciado.");
         try {
             Map<String, Object> map = new HashMap<>();
             restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarComprasProgramadasQuartz", createTokenForUser(map), void.class);
-            log.info("El registro de compras porgramadas culminó exitosamente...");
+            log.info("SERVICE MSQUARTZ - Registro de compras porgramadas culminó exitosamente.");
         } catch (RestClientException e) {
-            log.error("Error registramos compras programadas", e.getMessage());
+            log.error("SERVICE MSQUARTZ - Error mientras registramos compras programadas", e.getMessage());
         }
     }
 
     public void enviarEmailComprobantesQuartz() throws Exception {
-        log.info("Servicio De enviar emails iniciado...");
+        log.info("SERVICE MSQUARTZ - Envio de emails de comprobantes iniciado.");
         try {
             Map<String, Object> map = new HashMap<>();
             restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarEmailComprobantesQuartz", createTokenForUser(map), void.class);
-            log.info("El envío de emails de comprobantes culminó exitosamente...");
+            log.info("SERVICE MSQUARTZ - Envío de emails de comprobantes culminó exitosamente.");
         } catch (RestClientException e) {
-            log.error("Error enviamos emails de comprobantes", e.getMessage());
-        }
-    }
-
-    public void anularOrdenesDeCompraQuartz() throws Exception {
-        log.info("Servicio De anulación de órdenes de compra iniciado...");
-        try {
-            Map<String, Object> map = new HashMap<>();
-            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/anularOrdenesCompraQuartz", createTokenForUser(map), void.class);
-            log.info("El proceso de anulacion de órdenes de compras culminó exitosamente...");
-        } catch (RestClientException e) {
-            log.error("Error anulacion de órdenes de compras", e.getMessage());
+            log.error("SERVICE MSQUARTZ - Error mientras enviamos emails de comprobantes.", e.getMessage());
         }
     }
 
     public void enviarNotificacionesEmpleadosQuartz() throws Exception {
-        log.info("Servicio De envío de notificaciones empleados iniciado...");
+        log.info("SERVICE MSQUARTZ - Envío de notificaciones empleados iniciado.");
         try {
             Map<String, Object> map = new HashMap<>();
             restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarNotificacionesEmpleadosQuartz", createTokenForUser(map), void.class);
-            log.info("El proceso de envío de notificaciones empleados culminó exitosamente...");
+            log.info("SERVICE MSQUARTZ - Envío de notificaciones empleados culminó exitosamente.");
         } catch (RestClientException e) {
-            log.error("Error envío de notificaciones empleados", e.getMessage());
+            log.error("SERVICE MSQUARTZ - Error mientras enviamos notificaciones empleados", e.getMessage());
+        }
+    }
+
+    public void anularOrdenesDeCompraQuartz() throws Exception {
+        log.info("SERVICE MSQUARTZ - Proceso De anulación de órdenes de compra iniciado.");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/anularOrdenesCompraQuartz", createTokenForUser(map), void.class);
+            log.info("SERVICE MSQUARTZ - Proceso de anulacion de órdenes de compras culminó exitosamente.");
+        } catch (RestClientException e) {
+            log.error("SERVICE MSQUARTZ - Error mientras anulamos órdenes de compras.", e.getMessage());
         }
     }
 

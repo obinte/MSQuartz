@@ -30,13 +30,13 @@ public class EnvioFacturasElectronicasJob implements Job {
 
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
-        log.info("FACTURAS ELECTRONICAS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - FACTURAS ELECTRONICAS ** {} ** encendido @ {}", context.getJobDetail().getKey().getName(), context.getFireTime());
         try {
             bs.enviarFacturasElectronicasQuartz();
         } catch (Exception ex) {
             java.util.logging.Logger.getLogger(EnvioFacturasElectronicasJob.class.getName()).log(Level.SEVERE, null, ex);
         }
-        log.info("EL SIGUIENTE ENVIO DE FACTURAS se ejecutará @ {}", context.getNextFireTime());
+        log.info("JOB CONTROLLER MSQUARTZ - EL SIGUIENTE ENVIO DE FACTURAS se ejecutará @ {}", context.getNextFireTime());
     }
 
 }
