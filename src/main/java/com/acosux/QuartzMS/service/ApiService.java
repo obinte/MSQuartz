@@ -120,4 +120,15 @@ public class ApiService {
         }
     }
 
+    public void inactivarServiciosQuartz() throws Exception {
+        log.info("SERVICE MSQUARTZ - Inactivar servicios iniciado.");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/inactivarServiciosQuartz", createTokenForUser(map), void.class);
+            log.info("SERVICE MSQUARTZ - La inactivación de servicios culminó exitosamente.");
+        } catch (RestClientException e) {
+            log.error("SERVICE MSQUARTZ - Error mientras inactivamos servicios.", e.getMessage());
+        }
+    }
+
 }
