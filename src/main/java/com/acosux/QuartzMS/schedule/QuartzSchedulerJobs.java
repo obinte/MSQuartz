@@ -34,6 +34,8 @@ public class QuartzSchedulerJobs {
     private String CRON_ANULAR_OC;
     @Value("${quartz.cronenviarnotificacionesempleados}")
     private String CRON_ENVIAR_NOTIFICACIONES_EMPLEADOS;
+    @Value("${quartz.croninactivarservicios}")
+    private String CRON_INACTIVAR_SERVICIOS;
     Logger log = LoggerFactory.getLogger(getClass());
 
     /**
@@ -104,6 +106,20 @@ public class QuartzSchedulerJobs {
     @Bean(name = "enviarNotificacionesEmpleadosTrigger")
     public CronTriggerFactoryBean triggerEnviarNotificacionesEmpleados(@Qualifier("enviarNotificacionesEmpleados") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_ENVIAR_NOTIFICACIONES_EMPLEADOS, "triggerEnviarNotificacionesEmpleados");
+    }
+    
+    /**
+     *
+     * @return a job of a specifics ENVIAR NOTIFICACIONES EMPLEADOS
+     */
+    @Bean(name = "inactivarServicios")
+    public JobDetailFactoryBean jobInactivarServicios() {
+        return QuartzConfig.createJobDetail(InactivarServiciosJob.class, "jobInactivarServicios");
+    }
+
+    @Bean(name = "inactivarServiciosTrigger")
+    public CronTriggerFactoryBean triggerInactivarServicios(@Qualifier("inactivarServicios") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_ENVIAR_NOTIFICACIONES_EMPLEADOS, "triggerInactivarServicios");
     }
 
     /**
