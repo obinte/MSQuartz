@@ -36,6 +36,8 @@ public class QuartzSchedulerJobs {
     private String CRON_ENVIAR_NOTIFICACIONES_EMPLEADOS;
     @Value("${quartz.croninactivarservicios}")
     private String CRON_INACTIVAR_SERVICIOS;
+    @Value("${quartz.cronguiaremision}")
+    private String CRON_GUIA_REMISION;
     Logger log = LoggerFactory.getLogger(getClass());
 
     /**
@@ -134,6 +136,20 @@ public class QuartzSchedulerJobs {
     @Bean(name = "anularOrdenesDeCompraTrigger")
     public CronTriggerFactoryBean triggerAnularOrdenesDeCompra(@Qualifier("anularOrdenesDeCompra") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_ANULAR_OC, "triggerAnularOrdenesDeCompra");
+    }
+    
+    /**
+     *
+     * @return a job of a specifics ENVIAR GUIA DE REMISION ELECTRONICAS
+     */
+    @Bean(name = "envioGuiaRemisionElectronicas")
+    public JobDetailFactoryBean jobEnvioGuiaRemisionElectronicas() {
+        return QuartzConfig.createJobDetail(EnvioGuiaRemisionElectronicasJob.class, "jobEnvioGuiaRemisionElectronicas");
+    }
+
+    @Bean(name = "envioGuiaRemisionElectronicasTrigger")
+    public CronTriggerFactoryBean triggerEnvioGuiaRemisionElectronicas(@Qualifier("envioGuiaRemisionElectronicas") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_GUIA_REMISION, "triggerEnvioGuiaRemisionElectronicas");
     }
 
 }
