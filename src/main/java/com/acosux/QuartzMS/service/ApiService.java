@@ -131,4 +131,15 @@ public class ApiService {
         }
     }
 
+    public void enviarGuiaRemisionElectronicasQuartz() throws Exception {
+        log.info("SERVICE MSQUARTZ - Envío de guías remisión iniciado.");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarGuiaRemisionElectronicasQuartz", createTokenForUser(map), void.class);
+            log.info("SERVICE MSQUARTZ - Envío de guías remisión culminó exitosamente.");
+        } catch (RestClientException e) {
+            log.error("SERVICE MSQUARTZ - Error mientras enviamos guías remisión electrónicas.", e.getMessage());
+        }
+    }
+
 }
