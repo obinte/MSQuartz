@@ -38,6 +38,8 @@ public class QuartzSchedulerJobs {
     private String CRON_INACTIVAR_SERVICIOS;
     @Value("${quartz.cronguiaremision}")
     private String CRON_GUIA_REMISION;
+    @Value("${quartz.croninactivaractivofijo}")
+    private String CRON_INACTIVAR_ACTIVO_FIJO;
     Logger log = LoggerFactory.getLogger(getClass());
 
     /**
@@ -150,6 +152,20 @@ public class QuartzSchedulerJobs {
     @Bean(name = "envioGuiaRemisionElectronicasTrigger")
     public CronTriggerFactoryBean triggerEnvioGuiaRemisionElectronicas(@Qualifier("envioGuiaRemisionElectronicas") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_GUIA_REMISION, "triggerEnvioGuiaRemisionElectronicas");
+    }
+    
+    /**
+     *
+     * @return a job of a specifics INACTIVAR ACTIVO FIJO
+     */
+    @Bean(name = "inactivarActivoFijo")
+    public JobDetailFactoryBean jobInactivarActivoFijo() {
+        return QuartzConfig.createJobDetail(InactivarActivoFijoJob.class, "jobInactivarActivoFijo");
+    }
+
+    @Bean(name = "inactivarActivoFijoTrigger")
+    public CronTriggerFactoryBean triggerInactivarActivoFijo(@Qualifier("inactivarActivoFijo") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_INACTIVAR_ACTIVO_FIJO, "triggerInactivarActivoFijo");
     }
 
 }
