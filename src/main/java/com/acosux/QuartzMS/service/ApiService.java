@@ -55,7 +55,7 @@ public class ApiService {
     }
 
     public void enviarFacturasElectronicasQuartz() throws Exception {
-        log.info("SERVICE MSQUARTZ - Envío de facturas iniciado.");
+        log.info("SERVICE MSQUARTZ - Envío de facturas iniciado en el endpoint: " + ENDPOINT + ", Hora de inicio: " + new Date());
         try {
             Map<String, Object> map = new HashMap<>();
             restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarFacturasElectronicasQuartz", createTokenForUser(map), void.class);
