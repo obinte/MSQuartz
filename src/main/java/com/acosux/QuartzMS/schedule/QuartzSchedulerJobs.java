@@ -38,8 +38,6 @@ public class QuartzSchedulerJobs {
     private String CRON_INACTIVAR_SERVICIOS;
     @Value("${quartz.cronguiaremision}")
     private String CRON_GUIA_REMISION;
-    @Value("${quartz.cronverificaranulados:0 0 1 * * ?}")
-    private String CRON_VERIFICAR_ANULADOS;
     Logger log = LoggerFactory.getLogger(getClass());
 
     /**
@@ -152,20 +150,6 @@ public class QuartzSchedulerJobs {
     @Bean(name = "envioGuiaRemisionElectronicasTrigger")
     public CronTriggerFactoryBean triggerEnvioGuiaRemisionElectronicas(@Qualifier("envioGuiaRemisionElectronicas") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_GUIA_REMISION, "triggerEnvioGuiaRemisionElectronicas");
-    }
-
-    /**
-     *
-     * @return a job for VERIFICAR ANULADOS RECIBIDOS NOCTURNO
-     */
-    @Bean(name = "verificarAnuladosRecibidos")
-    public JobDetailFactoryBean jobVerificarAnuladosRecibidos() {
-        return QuartzConfig.createJobDetail(VerificarAnuladosRecibidosJob.class, "jobVerificarAnuladosRecibidos");
-    }
-
-    @Bean(name = "verificarAnuladosRecibidosTrigger")
-    public CronTriggerFactoryBean triggerVerificarAnuladosRecibidos(@Qualifier("verificarAnuladosRecibidos") JobDetail jobDetail) {
-        return QuartzConfig.createCronTrigger(jobDetail, CRON_VERIFICAR_ANULADOS, "triggerVerificarAnuladosRecibidos");
     }
 
 }

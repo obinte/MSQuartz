@@ -142,15 +142,4 @@ public class ApiService {
         }
     }
 
-    public void verificarAnuladosRecibidosQuartz() throws Exception {
-        log.info("SERVICE MSQUARTZ - Verificación nocturna de comprobantes recibidos anulados iniciada.");
-        try {
-            Map<String, Object> map = new HashMap<>();
-            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/verificarAnuladosRecibidosQuartz", createTokenForUser(map), void.class);
-            log.info("SERVICE MSQUARTZ - Verificación nocturna de comprobantes recibidos anulados culminó exitosamente.");
-        } catch (RestClientException e) {
-            log.error("SERVICE MSQUARTZ - Error mientras se verificaban comprobantes recibidos anulados.", e.getMessage());
-        }
-    }
-
 }
