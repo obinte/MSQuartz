@@ -38,8 +38,9 @@ public class QuartzSchedulerJobs {
     private String CRON_INACTIVAR_SERVICIOS;
     @Value("${quartz.cronguiaremision}")
     private String CRON_GUIA_REMISION;
-    @Value("${quartz.cronverificaranulados:0 0 1 * * ?}")
-    private String CRON_VERIFICAR_ANULADOS;
+    // AS-5922 (desactivado temporalmente): solo lo usaba el trigger comentado mas abajo
+//    @Value("${quartz.cronverificaranulados:0 0 1 * * ?}")
+//    private String CRON_VERIFICAR_ANULADOS;
     Logger log = LoggerFactory.getLogger(getClass());
 
     /**
@@ -158,14 +159,16 @@ public class QuartzSchedulerJobs {
      *
      * @return a job for VERIFICAR ANULADOS RECIBIDOS NOCTURNO
      */
-    @Bean(name = "verificarAnuladosRecibidos")
-    public JobDetailFactoryBean jobVerificarAnuladosRecibidos() {
-        return QuartzConfig.createJobDetail(VerificarAnuladosRecibidosJob.class, "jobVerificarAnuladosRecibidos");
-    }
-
-    @Bean(name = "verificarAnuladosRecibidosTrigger")
-    public CronTriggerFactoryBean triggerVerificarAnuladosRecibidos(@Qualifier("verificarAnuladosRecibidos") JobDetail jobDetail) {
-        return QuartzConfig.createCronTrigger(jobDetail, CRON_VERIFICAR_ANULADOS, "triggerVerificarAnuladosRecibidos");
-    }
+    // AS-5922 (desactivado temporalmente): la tarea nocturna que verificaba comprobantes recibidos
+    // anulados ya no se registra en el scheduler. El endpoint del servidor tambien esta comentado.
+//    @Bean(name = "verificarAnuladosRecibidos")
+//    public JobDetailFactoryBean jobVerificarAnuladosRecibidos() {
+//        return QuartzConfig.createJobDetail(VerificarAnuladosRecibidosJob.class, "jobVerificarAnuladosRecibidos");
+//    }
+//
+//    @Bean(name = "verificarAnuladosRecibidosTrigger")
+//    public CronTriggerFactoryBean triggerVerificarAnuladosRecibidos(@Qualifier("verificarAnuladosRecibidos") JobDetail jobDetail) {
+//        return QuartzConfig.createCronTrigger(jobDetail, CRON_VERIFICAR_ANULADOS, "triggerVerificarAnuladosRecibidos");
+//    }
 
 }
