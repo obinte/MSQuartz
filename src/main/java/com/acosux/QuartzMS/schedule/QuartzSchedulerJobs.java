@@ -38,6 +38,8 @@ public class QuartzSchedulerJobs {
     private String CRON_INACTIVAR_SERVICIOS;
     @Value("${quartz.cronguiaremision}")
     private String CRON_GUIA_REMISION;
+    @Value("${quartz.cronavisocaducidadfirma:0 0 8 * * ?}")
+    private String CRON_AVISO_CADUCIDAD_FIRMA;
     // AS-5922 (desactivado temporalmente): solo lo usaba el trigger comentado mas abajo
 //    @Value("${quartz.cronverificaranulados:0 0 1 * * ?}")
 //    private String CRON_VERIFICAR_ANULADOS;
@@ -153,6 +155,20 @@ public class QuartzSchedulerJobs {
     @Bean(name = "envioGuiaRemisionElectronicasTrigger")
     public CronTriggerFactoryBean triggerEnvioGuiaRemisionElectronicas(@Qualifier("envioGuiaRemisionElectronicas") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_GUIA_REMISION, "triggerEnvioGuiaRemisionElectronicas");
+    }
+
+    /**
+     *
+     * @return a job for AVISO CADUCIDAD FIRMA ELECTRONICA (AR-137), una vez al dia
+     */
+    @Bean(name = "enviarAvisoCaducidadFirma")
+    public JobDetailFactoryBean jobEnviarAvisoCaducidadFirma() {
+        return QuartzConfig.createJobDetail(EnviarAvisoCaducidadFirmaJob.class, "jobEnviarAvisoCaducidadFirma");
+    }
+
+    @Bean(name = "enviarAvisoCaducidadFirmaTrigger")
+    public CronTriggerFactoryBean triggerEnviarAvisoCaducidadFirma(@Qualifier("enviarAvisoCaducidadFirma") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_AVISO_CADUCIDAD_FIRMA, "triggerEnviarAvisoCaducidadFirma");
     }
 
     /**
