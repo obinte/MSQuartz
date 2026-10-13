@@ -153,6 +153,17 @@ public class ApiService {
         }
     }
 
+    public void corteCicloPasswordQuartz() throws Exception {
+        log.info("SERVICE MSQUARTZ - Corte de ciclo de contraseñas iniciado.");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/corteCicloPasswordQuartz", createTokenForUser(map), void.class);
+            log.info("SERVICE MSQUARTZ - Corte de ciclo de contraseñas culminó exitosamente.");
+        } catch (RestClientException e) {
+            log.error("SERVICE MSQUARTZ - Error mientras procesábamos el corte de ciclo de contraseñas.", e.getMessage());
+        }
+    }
+
     // AS-5922 (desactivado temporalmente): llamada al endpoint de la verificacion nocturna
     // de comprobantes recibidos anulados.
 //    public void verificarAnuladosRecibidosQuartz() throws Exception {
