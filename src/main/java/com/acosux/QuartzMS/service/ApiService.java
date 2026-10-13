@@ -142,6 +142,17 @@ public class ApiService {
         }
     }
 
+    public void notificarPasswordProximoVencimientoQuartz() throws Exception {
+        log.info("SERVICE MSQUARTZ - Aviso de vencimiento de contraseña iniciado.");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/notificarPasswordProximoVencimientoQuartz", createTokenForUser(map), void.class);
+            log.info("SERVICE MSQUARTZ - Aviso de vencimiento de contraseña culminó exitosamente.");
+        } catch (RestClientException e) {
+            log.error("SERVICE MSQUARTZ - Error mientras enviábamos los avisos de vencimiento de contraseña.", e.getMessage());
+        }
+    }
+
     // AS-5922 (desactivado temporalmente): llamada al endpoint de la verificacion nocturna
     // de comprobantes recibidos anulados.
 //    public void verificarAnuladosRecibidosQuartz() throws Exception {
