@@ -38,6 +38,10 @@ public class QuartzSchedulerJobs {
     private String CRON_INACTIVAR_SERVICIOS;
     @Value("${quartz.cronguiaremision}")
     private String CRON_GUIA_REMISION;
+    @Value("${quartz.cronavisopassword}")
+    private String CRON_AVISO_PASSWORD;
+    @Value("${quartz.croncortepassword}")
+    private String CRON_CORTE_PASSWORD;
     // AS-5922 (desactivado temporalmente): solo lo usaba el trigger comentado mas abajo
 //    @Value("${quartz.cronverificaranulados:0 0 1 * * ?}")
 //    private String CRON_VERIFICAR_ANULADOS;
@@ -153,6 +157,26 @@ public class QuartzSchedulerJobs {
     @Bean(name = "envioGuiaRemisionElectronicasTrigger")
     public CronTriggerFactoryBean triggerEnvioGuiaRemisionElectronicas(@Qualifier("envioGuiaRemisionElectronicas") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_GUIA_REMISION, "triggerEnvioGuiaRemisionElectronicas");
+    }
+
+    @Bean(name = "notificarPasswordProximoVencimiento")
+    public JobDetailFactoryBean jobNotificarPasswordProximoVencimiento() {
+        return QuartzConfig.createJobDetail(NotificarPasswordProximoVencimientoJob.class, "jobNotificarPasswordProximoVencimiento");
+    }
+
+    @Bean(name = "notificarPasswordProximoVencimientoTrigger")
+    public CronTriggerFactoryBean triggerNotificarPasswordProximoVencimiento(@Qualifier("notificarPasswordProximoVencimiento") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_AVISO_PASSWORD, "triggerNotificarPasswordProximoVencimiento");
+    }
+
+    @Bean(name = "corteCicloPassword")
+    public JobDetailFactoryBean jobCorteCicloPassword() {
+        return QuartzConfig.createJobDetail(CorteCicloPasswordJob.class, "jobCorteCicloPassword");
+    }
+
+    @Bean(name = "corteCicloPasswordTrigger")
+    public CronTriggerFactoryBean triggerCorteCicloPassword(@Qualifier("corteCicloPassword") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_CORTE_PASSWORD, "triggerCorteCicloPassword");
     }
 
     /**
