@@ -9,9 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- * AR-137: una vez al dia pide al servidor el correo de caducidad de la firma electronica.
- */
 public class EnviarAvisoCaducidadFirmaJob implements Job {
 
     Logger log = LoggerFactory.getLogger(getClass());

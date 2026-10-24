@@ -159,7 +159,7 @@ public class QuartzSchedulerJobs {
 
     /**
      *
-     * @return a job for AVISO CADUCIDAD FIRMA ELECTRONICA (AR-137), una vez al dia
+     * @return a job for AVISO CADUCIDAD FIRMA ELECTRONICA
      */
     @Bean(name = "enviarAvisoCaducidadFirma")
     public JobDetailFactoryBean jobEnviarAvisoCaducidadFirma() {
