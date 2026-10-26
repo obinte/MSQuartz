@@ -109,6 +109,17 @@ public class ApiService {
         }
     }
 
+    public void enviarAvisoCaducidadFirmaQuartz() throws Exception {
+        log.info("SERVICE MSQUARTZ - Aviso de caducidad de firma electrónica iniciado.");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/enviarAvisoCaducidadFirmaQuartz", createTokenForUser(map), void.class);
+            log.info("SERVICE MSQUARTZ - Aviso de caducidad de firma electrónica culminó exitosamente.");
+        } catch (RestClientException e) {
+            log.error("SERVICE MSQUARTZ - Error mientras enviamos el aviso de caducidad de firma electrónica", e.getMessage());
+        }
+    }
+
     public void anularOrdenesDeCompraQuartz() throws Exception {
         log.info("SERVICE MSQUARTZ - Proceso De anulación de órdenes de compra iniciado.");
         try {
