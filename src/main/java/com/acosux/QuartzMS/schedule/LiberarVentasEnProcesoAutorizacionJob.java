@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Libera las ventas que quedaron en proceso de autorización SRI (envío interrumpido) y cuya fecha ya pasó,
+ * Libera las ventas que quedaron en proceso de autorización SRI (el SRI no las autorizó) y cuya fecha ya pasó,
  * para que el usuario cambie la fecha del comprobante y vuelva a enviarlo.
  */
 @Component
