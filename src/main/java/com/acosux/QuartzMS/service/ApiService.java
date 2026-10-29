@@ -142,6 +142,17 @@ public class ApiService {
         }
     }
 
+    public void liberarVentasEnProcesoAutorizacionQuartz() throws Exception {
+        log.info("SERVICE MSQUARTZ - Liberación de ventas en proceso de autorización iniciada.");
+        try {
+            Map<String, Object> map = new HashMap<>();
+            restTemplate.postForObject(ENDPOINT + "/todocompuWS/quartzController/liberarVentasEnProcesoAutorizacionQuartz", createTokenForUser(map), void.class);
+            log.info("SERVICE MSQUARTZ - Liberación de ventas en proceso de autorización culminó exitosamente.");
+        } catch (RestClientException e) {
+            log.error("SERVICE MSQUARTZ - Error mientras se liberaban ventas en proceso de autorización.", e.getMessage());
+        }
+    }
+
     // AS-5922 (desactivado temporalmente): llamada al endpoint de la verificacion nocturna
     // de comprobantes recibidos anulados.
 //    public void verificarAnuladosRecibidosQuartz() throws Exception {

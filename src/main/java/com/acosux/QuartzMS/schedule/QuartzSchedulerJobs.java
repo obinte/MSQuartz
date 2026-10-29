@@ -38,6 +38,8 @@ public class QuartzSchedulerJobs {
     private String CRON_INACTIVAR_SERVICIOS;
     @Value("${quartz.cronguiaremision}")
     private String CRON_GUIA_REMISION;
+    @Value("${quartz.cronliberarventasenproceso:0 0 0 * * ?}")
+    private String CRON_LIBERAR_VENTAS_EN_PROCESO;
     // AS-5922 (desactivado temporalmente): solo lo usaba el trigger comentado mas abajo
 //    @Value("${quartz.cronverificaranulados:0 0 1 * * ?}")
 //    private String CRON_VERIFICAR_ANULADOS;
@@ -153,6 +155,20 @@ public class QuartzSchedulerJobs {
     @Bean(name = "envioGuiaRemisionElectronicasTrigger")
     public CronTriggerFactoryBean triggerEnvioGuiaRemisionElectronicas(@Qualifier("envioGuiaRemisionElectronicas") JobDetail jobDetail) {
         return QuartzConfig.createCronTrigger(jobDetail, CRON_GUIA_REMISION, "triggerEnvioGuiaRemisionElectronicas");
+    }
+
+    /**
+     *
+     * @return a job for LIBERAR VENTAS EN PROCESO DE AUTORIZACION SRI
+     */
+    @Bean(name = "liberarVentasEnProcesoAutorizacion")
+    public JobDetailFactoryBean jobLiberarVentasEnProcesoAutorizacion() {
+        return QuartzConfig.createJobDetail(LiberarVentasEnProcesoAutorizacionJob.class, "jobLiberarVentasEnProcesoAutorizacion");
+    }
+
+    @Bean(name = "liberarVentasEnProcesoAutorizacionTrigger")
+    public CronTriggerFactoryBean triggerLiberarVentasEnProcesoAutorizacion(@Qualifier("liberarVentasEnProcesoAutorizacion") JobDetail jobDetail) {
+        return QuartzConfig.createCronTrigger(jobDetail, CRON_LIBERAR_VENTAS_EN_PROCESO, "triggerLiberarVentasEnProcesoAutorizacion");
     }
 
     /**
